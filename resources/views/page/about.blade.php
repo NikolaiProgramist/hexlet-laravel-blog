@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'О блоге')
+@section('title', 'About')
 
 @section('content')
-    <h1>О блоге</h1>
-    <p>Эксперименты с Laravel на Хекслете</p>
+    <div class="mt-10 pt-10">
+        <p class="text-sm/6 text-gray-600">Эксперименты с Laravel на Хекслете</p>
+    </div>
 @endsection
