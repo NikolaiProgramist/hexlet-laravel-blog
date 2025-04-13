@@ -12,4 +12,10 @@ class ArticleController extends Controller
         $articles = Article::paginate(3);
         return view('article.index', compact('articles'));
     }
+
+    public function show(int $id): View
+    {
+        $article = Article::findOrFail($id);
+        return view('article.show', compact('article'));
+    }
 }
