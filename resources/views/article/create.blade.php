@@ -7,9 +7,6 @@
         {{ html()->modelForm($article, 'POST', route('articles.store'))->open() }}
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-base/7 font-semibold text-gray-900">Article</h2>
-                    <p class="mt-1 text-sm/6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
-
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="col-span-full">
                             {{ html()->label('Name', 'name')->class('block text-sm/6 font-medium text-gray-900') }}
