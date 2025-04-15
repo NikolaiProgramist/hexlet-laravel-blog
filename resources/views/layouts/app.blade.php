@@ -50,6 +50,10 @@
             </nav>
         </header>
 
+        <div class="flex justify-end w-full h-14 mt-5 mx-auto max-w-7xl">
+            @yield('flash')
+        </div>
+
         <main>
             <div class="bg-white pt-24 sm:pt-32">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">

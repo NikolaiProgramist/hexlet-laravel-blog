@@ -10,10 +10,12 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $articles = Article::paginate(3);
-        return view('article.index', compact('articles'));
+        $flashMessage = $request->session()->get('status');
+
+        return view('article.index', compact('articles', 'flashMessage'));
     }
 
     public function show(int $id): View
@@ -39,6 +41,7 @@ class ArticleController extends Controller
         $article->fill($data);
         $article->save();
 
+        $request->session()->flash('status', 'Article has been added');
         return redirect()
             ->route('articles.index');
     }
