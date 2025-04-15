@@ -4,6 +4,14 @@
 
 @section('content')
     <div class="mt-20">
+        @if($errors->any())
+            <div>
+                @foreach($errors->all() as $error)
+                    <p class="line-clamp-3 text-sm/6 text-red-600">{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
         {{ html()->modelForm($article, 'POST', route('articles.store'))->open() }}
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
