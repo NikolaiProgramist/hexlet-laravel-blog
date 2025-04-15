@@ -29,13 +29,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                                <a href="{{ route('articles.create') }}">
+                                    <span class="absolute -inset-1.5"></span>
+                                </a>
+                                <span class="sr-only">New article</span>
+                                <svg class="size-5" fill="white" viewBox="0 0 45.402 45.402">
+                                    <g>
+                                        <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141
+                                            c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27
+                                            c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435
+                                            c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"/>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
         </header>
 
         <main>
-            <div class="bg-white py-24 sm:py-32">
+            <div class="bg-white pt-24 sm:pt-32">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">
                     <div class="mx-auto max-w lg:mx-0 pb-10 border-b border-gray-200">
                         <h1 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">@yield('title')</h1>
