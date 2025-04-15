@@ -55,7 +55,7 @@
         </div>
 
         <main>
-            <div class="bg-white pt-24 sm:pt-32">
+            <div class="bg-white pt-8">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">
                     <div class="mx-auto max-w lg:mx-0 pb-10 border-b border-gray-200">
                         <h1 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">@yield('title')</h1>
