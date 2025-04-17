@@ -2,24 +2,21 @@
 
 @section('title', 'Articles')
 
-@section('flash')
-    @if($flashMessage)
-        <div class="bg-green-100 w-70 h-full rounded-md">
-            <div class="flex">
-                <svg class="size-6 mt-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#00ca53" aria-hidden="true" data-slot="icon"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"></path></svg>
-                <span class="mt-4 ml-2 line-clamp-3 text-sm/6 text-green-700">{{ $flashMessage }}</span>
-            </div>
-        </div>
-    @endif
-@endsection
-
 @section('content')
     <div>
         <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             @foreach($articles as $article)
                 <article class="flex max-w-xl flex-col items-start justify-between">
-                    <div class="flex items-center gap-x-4 text-xs">
+                    <div class="flex justify-between items-center w-full gap-x-4 text-xs">
                         <time datetime="{{ $article->created_at }}" class="text-gray-500">{{ $article->created_at }}</time>
+                        <a href="{{ route('articles.edit', $article) }}" id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                type="button">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                            </svg>
+                            <span class="sr-only">Edit article</span>
+                        </a>
                     </div>
                     <div class="group relative">
                         <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">

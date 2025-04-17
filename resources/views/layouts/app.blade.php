@@ -51,7 +51,14 @@
         </header>
 
         <div class="flex justify-end w-full h-14 mt-5 mx-auto max-w-7xl">
-            @yield('flash')
+            @if(Session::has('status'))
+                <div class="bg-green-100 w-70 h-full rounded-md">
+                    <div class="flex">
+                        <svg class="size-6 mt-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#00ca53" aria-hidden="true" data-slot="icon"><path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"></path></svg>
+                        <span class="mt-4 ml-2 line-clamp-3 text-sm/6 text-green-700">{{ Session::get('status') }}</span>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <main>

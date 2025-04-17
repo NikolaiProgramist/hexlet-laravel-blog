@@ -13,9 +13,7 @@ class ArticleController extends Controller
     public function index(Request $request): View
     {
         $articles = Article::paginate(3);
-        $flashMessage = $request->session()->get('status');
-
-        return view('article.index', compact('articles', 'flashMessage'));
+        return view('article.index', compact('articles'));
     }
 
     public function show(int $id): View
@@ -41,7 +39,29 @@ class ArticleController extends Controller
         $article->fill($data);
         $article->save();
 
-        $request->session()->flash('status', 'Article has been added');
+        $request->session()->flash('status', 'Article has been added successfully');
+        return redirect()
+            ->route('articles.index');
+    }
+
+    public function edit(int $id): View
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    public function update(Request $request, int $id): RedirectResponse
+    {
+        $article = Article::findOrFail($id);
+        $data = $request->validate([
+            'name' => "required|unique:articles,name,{$article->id}",
+            'body' => 'required|min:100'
+        ]);
+
+        $article->fill($data);
+        $article->save();
+
+        $request->session()->flash('status', 'Article has been edit successfully');
         return redirect()
             ->route('articles.index');
     }
