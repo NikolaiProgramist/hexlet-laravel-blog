@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 
 class ArticleController extends Controller
@@ -28,12 +29,9 @@ class ArticleController extends Controller
         return view('article.create', compact('article'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreArticleRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'name' => 'required|unique:articles',
-            'body' => 'required|min:100'
-        ]);
+        $data = $request->validated();
 
         $article = new Article();
         $article->fill($data);
@@ -50,13 +48,10 @@ class ArticleController extends Controller
         return view('article.edit', compact('article'));
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreArticleRequest $request, int $id): RedirectResponse
     {
         $article = Article::findOrFail($id);
-        $data = $request->validate([
-            'name' => "required|unique:articles,name,{$article->id}",
-            'body' => 'required|min:100'
-        ]);
+        $data = $request->validated();
 
         $article->fill($data);
         $article->save();
