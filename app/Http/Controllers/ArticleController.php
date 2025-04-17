@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Requests\StoreArticleRequest;
@@ -11,7 +9,7 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
         $articles = Article::paginate(3);
         return view('article.index', compact('articles'));
