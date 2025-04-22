@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Requests\StoreArticleRequest;
@@ -55,6 +56,19 @@ class ArticleController extends Controller
         $article->save();
 
         $request->session()->flash('status', 'Article has been edit successfully');
+        return redirect()
+            ->route('articles.index');
+    }
+
+    public function destroy(Request $request, int $id): RedirectResponse
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->delete();
+        }
+
+        $request->session()->flash('status', 'Article has been deleted successfully');
         return redirect()
             ->route('articles.index');
     }
