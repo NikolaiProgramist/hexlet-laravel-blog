@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArticleRequest extends FormRequest
+/**
+ * @property Article $article
+ */
+class ArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,8 +25,10 @@ class StoreArticleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $articleId = $this->article ? $this->article->id : 'NULL';
+
         return [
-            'name' => "required|unique:articles,name,{$this->id}",
+            'name' => "required|unique:articles,name,{$articleId}",
             'body' => 'required|min:100'
         ];
     }

@@ -2,74 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Article;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Requests\StoreArticleRequest;
-use App\Models\Article;
 
 class ArticleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(): View
     {
         $articles = Article::paginate(3);
         return view('article.index', compact('articles'));
     }
 
-    public function show(int $id): View
-    {
-        $article = Article::findOrFail($id);
-        return view('article.show', compact('article'));
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create(): View
     {
         $article = new Article();
         return view('article.create', compact('article'));
     }
 
-    public function store(StoreArticleRequest $request): RedirectResponse
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(ArticleRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-
         $article = new Article();
-        $article->fill($data);
+        $article->fill($request->all());
         $article->save();
 
-        $request->session()->flash('status', 'Article has been added successfully');
         return redirect()
-            ->route('articles.index');
+            ->route('articles.index')
+            ->with('status', 'Article has been created successfully');
     }
 
-    public function edit(int $id): View
+    /**
+     * Display the specified resource.
+     */
+    public function show(Article $article): View
     {
-        $article = Article::findOrFail($id);
+        return view('article.show', compact('article'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Article $article): View
+    {
         return view('article.edit', compact('article'));
     }
 
-    public function update(StoreArticleRequest $request, int $id): RedirectResponse
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ArticleRequest $request, Article $article): RedirectResponse
     {
-        $article = Article::findOrFail($id);
-        $data = $request->validated();
-
-        $article->fill($data);
+        $article->fill($request->all());
         $article->save();
 
-        $request->session()->flash('status', 'Article has been edit successfully');
         return redirect()
-            ->route('articles.index');
+            ->route('articles.index')
+            ->with('status', 'Article has been edit successfully');
     }
 
-    public function destroy(Request $request, int $id): RedirectResponse
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Article $article): RedirectResponse
     {
-        $article = Article::find($id);
-
-        if ($article) {
-            $article->delete();
-        }
-
-        $request->session()->flash('status', 'Article has been deleted successfully');
+        $article->delete();
         return redirect()
-            ->route('articles.index');
+            ->route('articles.index')
+            ->with('status', 'Article has been deleted successfully');
     }
 }
